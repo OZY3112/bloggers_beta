@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "bloggers_beta",
+			"path": "."
+		},
+		{
+			"name": ".git",
+			"path": "..\\bloggers\\.git"
+		}
+	],
+	"settings": {}
+}
