@@ -2,7 +2,8 @@ import "../styles/globals.css";
 import create from "zustand";
 import { useAuth, useSignOut } from "../firebase/firebase";
 import { useState, useEffect } from "react";
-function MyApp({ Component, pageProps }) {
+import type {AppProps} from "next/app";
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Component {...pageProps} />
@@ -14,7 +15,6 @@ export const useStore = create((set) => ({
   currentUserDate: () => set(() => []),
   loading: () => set(() => false),
   err: () => set(() => false),
-  photoURL: () => set(() => currentUser?.photoURL),
   // signOut: () => set(() => useSignOut())
 }));
 export default MyApp;

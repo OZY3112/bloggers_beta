@@ -6,7 +6,7 @@ import HomeBlogs from "../compos/HomeBlogs";
 import { useStore } from "./_app";
 
 export default function Home() {
-  const currentUser = useStore((state) => state.currentUser);
+  const currentUser = useStore((state: any) => state.currentUser);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(false);
 

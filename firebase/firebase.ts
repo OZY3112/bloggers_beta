@@ -35,16 +35,14 @@ export const handleGoogleAuth = () => {
   return signInWithPopup(auth, googleAuthProvider);
 };
 export const useSignOut = () => {
-  // console.log("log out successful")
+  console.log("log out successful")
   return signOut(auth);
 };
 export const useAuth = () => {
-  // const currentUserData = useStore((state) => state.currentUserData);
   const [currentUser, setCurrentUser] = useState();
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => setCurrentUser(user));
+    const unsub = onAuthStateChanged(auth, (user: any) => setCurrentUser(user));
     return unsub;
   }, []);
-  // console.log(currentUser)
   return currentUser;
 };

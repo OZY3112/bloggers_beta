@@ -1,4 +1,6 @@
-export default function SidebarListItem({ logo, title }) {
+import type { AppProps } from "next/app";
+
+export default function SidebarListItem({ logo, title }: { logo: any; title: string }) {
   return (
     <li className=" mb-2 duration-300 py-2 hover:bg-priActive rounded-3xl ">
       <div className=" px-3 flex text-font mb-2 gap-3  ">
