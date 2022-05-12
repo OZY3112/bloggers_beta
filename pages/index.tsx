@@ -6,7 +6,6 @@ import HomeBlogs from "../compos/HomeBlogs";
 import { useStore } from "./_app";
 
 export default function Home() {
-  const currentUser = useStore((state: any) => state.currentUser);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(false);
 
@@ -19,7 +18,7 @@ export default function Home() {
       </Head>
       <div className="">
         <div className="flex  w-screen h-screen bg-bg ">
-          <SideBar currentUser={currentUser} />
+          <SideBar  />
           <HomeBlogs />
         </div>
       </div>

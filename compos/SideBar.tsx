@@ -20,13 +20,9 @@ export default function SideBar({}) {
   const date = new Date();
   // console.log(currentUser)
 
-  const [photoURL, setPhotoURL] = useState();
-  const noUserPfp =
+  const noUserPfp: string =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM2VR27b_2TRmQQmTK3rMt8xNxUedXsodYg2Q2nUcH4XwCU0de4dvhK8vlhDChqcoM0Qs&usqp=CAU";
 
-  useLayoutEffect(() => {
-    setPhotoURL(currentUser?.photoURL);
-  }, [currentUser, photoURL]);
   return (
     <section className=" w-1/5 h-screen ">
       <div
@@ -61,7 +57,7 @@ export default function SideBar({}) {
         >
           <div className="my-auto flex justify-center ">
             <Image
-              src={photoURL ?? noUserPfp}
+              src={null ?? noUserPfp}
               alt="profile"
               className="rounded-full w-10 h-10"
               height={50}
@@ -69,9 +65,8 @@ export default function SideBar({}) {
             />
           </div>
           <div className="text-fontActive">
-            <h4 className="font-bold "> {currentUser?.displayName} </h4>
+            <h4 className="font-bold ">{/* {currentUser?.displayName} */}</h4>
             <h6 className="flex justify-center">
-              {" "}
               {date.getMonth() + 1} / {date.getDate()} / {date.getFullYear()}{" "}
             </h6>
           </div>
