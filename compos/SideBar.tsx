@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import {
   BsFillGearFill,
   BsFillSignpostFill,
@@ -9,16 +8,10 @@ import {
 import { AiFillHome } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
 import SidebarListItem from "./ui/SidebarListItem";
-import { useState, useLayoutEffect } from "react";
-import { useStore } from "../pages/_app";
-import { useAuth, useSignOut } from "../firebase/firebase";
+import { useState } from "react";
 export default function SideBar({}) {
-  const currentUser = useAuth();
   const [dropDownOpen, setDropDownOpen] = useState(false);
-  const [postTabOpen, setPostTabOpen] = useState(false);
-
   const date = new Date();
-  // console.log(currentUser)
 
   const noUserPfp: string =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM2VR27b_2TRmQQmTK3rMt8xNxUedXsodYg2Q2nUcH4XwCU0de4dvhK8vlhDChqcoM0Qs&usqp=CAU";
@@ -33,11 +26,8 @@ export default function SideBar({}) {
       >
         <ul className=" mx-[1rem] my-[2rem] ">
           <SidebarListItem title="Blogs" logo={<AiFillHome />} />
-
           <SidebarListItem title="Global chat" logo={<BsFillChatFill />} />
-
           <SidebarListItem title="Profile" logo={<FaUserAlt />} />
-
           <SidebarListItem title="Settings" logo={<BsFillGearFill />} />
 
           <li className=" duration-300 py-2 bg-acs  hover:bg-acsActive rounded-3xl ">
@@ -50,6 +40,7 @@ export default function SideBar({}) {
             </div>
           </li>
         </ul>
+
         <figure
           className="  
          text-font justify-around py-3 border-font border-t-2 absolute bottom-[-8px]
@@ -85,9 +76,7 @@ export default function SideBar({}) {
       {dropDownOpen && (
         <div className=" absolute bottom-28 bg-pri left-64 rounded-md ">
           <figure className=" w-24 h-24 ">
-            <button className=" bg-bg " onClick={useSignOut}>
-              Log out
-            </button>
+            <button className=" bg-bg ">Log out</button>
           </figure>
         </div>
       )}

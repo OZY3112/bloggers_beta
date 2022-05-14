@@ -1,9 +1,6 @@
-import React from "react";
 import { BiSearch } from "react-icons/bi";
 import { WiSunrise } from "react-icons/wi";
-import { useAuth } from "../../firebase/firebase";
 export default function Nav() {
-  const currentUser = useAuth();
   return (
     <nav className=" flex justify-around mt-8 font-roboto-slab ">
       <h4 className=" flex text-xl text-3xl ">
@@ -11,7 +8,8 @@ export default function Nav() {
           <WiSunrise />
         </span>
         <span className="font-bold "> Good morning</span>
-        <span className="font-open-sans">, {currentUser?.displayName} </span>
+        <span className="font-open-sans">,
+          </span>
       </h4>
       <div className=" relative ">
         <input

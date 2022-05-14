@@ -1,14 +1,8 @@
 import Head from "next/head";
-import { useAuth } from "../firebase/firebase";
-import { useState, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import SideBar from "../compos/SideBar";
 import HomeBlogs from "../compos/HomeBlogs";
-import { useStore } from "./_app";
-
 export default function Home() {
-  const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState(false);
-
   return (
     <>
       <Head>
@@ -18,7 +12,7 @@ export default function Home() {
       </Head>
       <div className="">
         <div className="flex  w-screen h-screen bg-bg ">
-          <SideBar  />
+          <SideBar />
           <HomeBlogs />
         </div>
       </div>

@@ -1,5 +1,3 @@
-import React from "react";
-
 const PostTab = () => {
   return <div></div>;
 };
