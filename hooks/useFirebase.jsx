@@ -8,6 +8,7 @@ const firebaseConfig = {
 };
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { initializeApp } from "firebase/app";
 import {
   GoogleAuthProvider,
   signOut,
@@ -34,14 +35,15 @@ const googleAuthProvider = new GoogleAuthProvider();
 const useFirebase = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
-  const currentUser = useAuth();
   const usersColRes = collection(db, "users");
   const blogsColRes = collection(db, "blogs");
+  let currentUser
   const router = useRouter();
   const checkCurrentUser = () => {
     if (currentUser) {
       router.push("/");
-    } else {
+    } 
+    if (!currentUser) {
       router.push("/login");
     }
   };
@@ -59,7 +61,11 @@ const useFirebase = () => {
     }, []);
     return currentUser;
   };
+   currentUser = useAuth();
 
+  useEffect(() => {
+    checkCurrentUser();
+  }, [currentUser]);
   return {
     currentUser,
     err,
