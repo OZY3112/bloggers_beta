@@ -3,10 +3,10 @@ import type { AppProps } from "next/app";
 import useFirebase from "../hooks/useFirebase";
 import { useLayoutEffect } from "react";
 function MyApp({ Component, pageProps }: AppProps) {
-  const { checkCurrentUser } = useFirebase();
+  const { checkCurrentUser, currentUser } = useFirebase();
   useLayoutEffect(() => {
     checkCurrentUser();
-  }, []);
+  }, [currentUser]);
   return (
     <>
       <Component {...pageProps} />

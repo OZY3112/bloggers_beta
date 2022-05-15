@@ -33,13 +33,23 @@ const googleAuthProvider = new GoogleAuthProvider();
 //addDoc(collection(db, "example"), {info}, "name of doc")
 
 const useFirebase = () => {
+  const useAuth = () => {
+    const [currentUser, setCurrentUser] = useState();
+    useEffect(() => {
+      return onAuthStateChanged(auth, (user) => setCurrentUser(user));
+    }, []);
+    return currentUser;
+  };
+
+  const currentUser = useAuth();
   const [isPending, startTransition] = useTransition();
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [PhotoUrl, setPhotoUrl] = useState();
   const usersColRes = collection(db, "users");
   const blogsColRes = collection(db, "blogs");
-  const [PhotoUrl, setPhotoUrl] = useState();
-  let currentUser;
+  const userName = currentUser?.displayName;
+
   const router = useRouter();
   const handleLogOut = () => {
     return signOut(auth);
@@ -48,21 +58,12 @@ const useFirebase = () => {
     return signInWithPopup(auth, googleAuthProvider);
   };
 
-  const useAuth = () => {
-    const [currentUser, setCurrentUser] = useState();
-    useEffect(() => {
-      return onAuthStateChanged(auth, (user) => setCurrentUser(user));
-    }, []);
-    return currentUser;
-  };
-  currentUser = useAuth();
-
   const checkCurrentUser = () => {
-    if (currentUser) {
-      router.push("/");
-    } else {
-      router.push("/login");
-    }
+    // if (currentUser) {
+    //   router.push("/");
+    // } else {
+    //   router.push("/login");
+    // }
   };
   useEffect(() => {
     setPhotoUrl(currentUser?.photoURL);
@@ -72,6 +73,7 @@ const useFirebase = () => {
     err,
     loading,
     PhotoUrl,
+    userName,
     checkCurrentUser,
     handleLogOut,
     handleGoogleAuth,
