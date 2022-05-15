@@ -1,5 +1,7 @@
 import Head from "next/head";
+import useFirebase from "../hooks/useFirebase";
 export default function Login() {
+  const { handleGoogleAuth } = useFirebase();
   return (
     <section className="">
       <Head>
@@ -10,7 +12,7 @@ export default function Login() {
       <div className="">
         <div className="">
           <div className="">
-            <button className="">Log in with Google</button>
+            <button onClick={handleGoogleAuth} className="">Log in with Google</button>
           </div>
         </div>
         <div className="">

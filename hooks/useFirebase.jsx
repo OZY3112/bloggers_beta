@@ -6,7 +6,6 @@ const firebaseConfig = {
   messagingSenderId: "200715862160",
   appId: "1:200715862160:web:5bfc7afd8629f719645815",
 };
-import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { initializeApp } from "firebase/app";
 import {
@@ -25,6 +24,7 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
+import { useState, useEffect, useLayoutEffect, useTransition } from "react";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -33,20 +33,14 @@ const googleAuthProvider = new GoogleAuthProvider();
 //addDoc(collection(db, "example"), {info}, "name of doc")
 
 const useFirebase = () => {
+  const [isPending, startTransition] = useTransition();
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const usersColRes = collection(db, "users");
   const blogsColRes = collection(db, "blogs");
-  let currentUser
+  const [PhotoUrl, setPhotoUrl] = useState();
+  let currentUser;
   const router = useRouter();
-  const checkCurrentUser = () => {
-    if (currentUser) {
-      router.push("/");
-    } 
-    if (!currentUser) {
-      router.push("/login");
-    }
-  };
   const handleLogOut = () => {
     return signOut(auth);
   };
@@ -61,15 +55,23 @@ const useFirebase = () => {
     }, []);
     return currentUser;
   };
-   currentUser = useAuth();
+  currentUser = useAuth();
 
+  const checkCurrentUser = () => {
+    if (currentUser) {
+      router.push("/");
+    } else {
+      router.push("/login");
+    }
+  };
   useEffect(() => {
-    checkCurrentUser();
+    setPhotoUrl(currentUser?.photoURL);
   }, [currentUser]);
   return {
     currentUser,
     err,
     loading,
+    PhotoUrl,
     checkCurrentUser,
     handleLogOut,
     handleGoogleAuth,

@@ -5,12 +5,14 @@ import {
   BsFillChatFill,
   BsThreeDotsVertical,
 } from "react-icons/bs";
+import useFirebase from "../hooks/useFirebase";
 import { AiFillHome } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
 import SidebarListItem from "./ui/SidebarListItem";
 import { useState } from "react";
 export default function SideBar({}) {
   const [dropDownOpen, setDropDownOpen] = useState(false);
+  const { PhotoUrl } = useFirebase();
   const date = new Date();
 
   const noUserPfp: string =
@@ -48,7 +50,7 @@ export default function SideBar({}) {
         >
           <div className="my-auto flex justify-center ">
             <Image
-              src={null ?? noUserPfp}
+              src={PhotoUrl ?? noUserPfp}
               alt="profile"
               className="rounded-full w-10 h-10"
               height={50}
