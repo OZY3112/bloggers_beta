@@ -60,7 +60,7 @@ const useFirebase = () => {
 
   const checkCurrentUser = () => {
     // if (currentUser) {
-    //   router.push("/");
+    //   router.push("/blogs");
     // } else {
     //   router.push("/login");
     // }
@@ -68,6 +68,9 @@ const useFirebase = () => {
   useEffect(() => {
     setPhotoUrl(currentUser?.photoURL);
   }, [currentUser]);
+
+  const [postType, setPostType] = useState("");
+
   return {
     currentUser,
     err,

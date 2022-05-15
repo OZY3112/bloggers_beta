@@ -14,9 +14,16 @@ import {
 import { FaUserAlt } from "react-icons/fa";
 import SidebarListItem from "./ui/SidebarListItem";
 import { useState } from "react";
-export default function SideBar({}) {
+export default function SideBar({
+  sidebarOpen,
+  setSidebarOpen,
+  setPostTabOpen,
+}: {
+  sidebarOpen: boolean;
+  setSidebarOpen: (sidebarOpen: boolean) => void;
+  setPostTabOpen: (postTabOpen: boolean) => void;
+}) {
   const [dropDownOpen, setDropDownOpen] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
   const { PhotoUrl, userName } = useFirebase();
   const date = new Date();
   const noUserPfp: string =
@@ -25,7 +32,7 @@ export default function SideBar({}) {
   return (
     <section
       className={` h-screen duration-200 ${
-        sidebarOpen ? " w-1/5 " : " w-[8%] "
+        sidebarOpen ? "w-1/5" : "w-[8%]"
       }`}
     >
       <div className="overflow-hidden bg-pri h-full rounded-r-[22px] p-[1rem] relative">
@@ -59,7 +66,10 @@ export default function SideBar({}) {
             logo={<FaUserAlt />}
           />
 
-          <li className=" duration-300 py-2 bg-acs  hover:bg-acsActive rounded-3xl ">
+          <li
+            className=" duration-300 py-2 bg-acs  hover:bg-acsActive rounded-3xl "
+            onClick={() => setPostTabOpen(true)}
+          >
             <div className=" px-3 flex text-font duration-300 hover:text-fontActive mb-2 gap-3  ">
               <p
                 className={`my-auto text-[1.8rem] text-fontActive ${
