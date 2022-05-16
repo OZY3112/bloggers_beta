@@ -1,3 +1,8 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAIdgbPi1IP9YgPKK8k8G_WiPhEcNtHG9o",
   authDomain: "bloggers-7488c.firebaseapp.com",
@@ -6,8 +11,10 @@ const firebaseConfig = {
   messagingSenderId: "200715862160",
   appId: "1:200715862160:web:5bfc7afd8629f719645815",
 };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 import { useRouter } from "next/router";
-import { initializeApp } from "firebase/app";
 import {
   GoogleAuthProvider,
   signOut,
@@ -24,11 +31,12 @@ import {
   getDoc,
   getDocs,
   updateDoc,
+  query,
+  where,
   deleteDoc,
 } from "firebase/firestore";
-import { useState, useEffect, useLayoutEffect, useTransition } from "react";
+import { useState, useEffect, useTransition } from "react";
 
-const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth();
 const googleAuthProvider = new GoogleAuthProvider();
@@ -44,15 +52,18 @@ const useFirebase = () => {
 
   const currentUser = useAuth();
   const [isPending, startTransition] = useTransition();
+  const [currentUserDoc, setCurrentUserDoc] = useState();
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const [PhotoUrl, setPhotoUrl] = useState();
   const [followersArray, setFollowersArray] = useState([]);
   const [followingArray, setFollowingArray] = useState([]);
   const [likesArray, setLikesArray] = useState([]);
-  const userName = currentUser?.displayName;
-  const userEmail = currentUser?.email;
+  let userName = currentUser?.displayName;
+  let userEmail = currentUser?.email;
+  let userUid = currentUser?.uid;
   const blogsColRef = collection(db, "blogs");
+  const usersColRef = collection(db, "users");
   const router = useRouter();
 
   const checkCurrentUser = () => {
@@ -68,8 +79,8 @@ const useFirebase = () => {
   };
   const AddNewUserDoc = async () => {
     const userUid = currentUser?.uid;
-    const usersColRef = doc(db, "users", userUid);
-    await setDoc(usersColRef, {
+    const usersDocRef = doc(db, "users", userUid);
+    await setDoc(usersDocRef, {
       name: userName,
       pfp: PhotoUrl,
       email: userEmail,
@@ -80,11 +91,22 @@ const useFirebase = () => {
       likes: likesArray,
     });
   };
+  const [userDoc, setUserDoc] = useState([]);
+  const getUserDoc = async () => {
+    if (userUid) {
+      const q = query(usersColRef, where("uid", "==", userUid));
+      const data = await getDocs(q);
+      console.log(data)
+      console.log(data.docs.map((user) => ({ ...user.data(), id: user.uid })));
+      setUserDoc(data.docs.map((user) => ({ ...user.data(), id: user.uid })));
+    }
+  };
+  // console.log(userDoc);
 
   const handleGoogleAuth = () => {
     signInWithPopup(auth, googleAuthProvider)
-      .then(() => AddNewUserDoc())
-      .then(() => checkCurrentUser());
+      .then(() => checkCurrentUser().catch((err) => console.log("err", err)))
+      .then(() => AddNewUserDoc());
   };
 
   useEffect(() => {
@@ -103,6 +125,7 @@ const useFirebase = () => {
     checkCurrentUser,
     handleLogOut,
     handleGoogleAuth,
+    getUserDoc,
   };
 };
 export default useFirebase;

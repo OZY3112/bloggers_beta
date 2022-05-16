@@ -1,10 +1,10 @@
 import Image from "next/image";
 import {
-  BsFillGearFill,
   BsFillSignpostFill,
   BsFillChatFill,
   BsThreeDotsVertical,
 } from "react-icons/bs";
+import { BiLogOut } from "react-icons/bi";
 import useFirebase from "../hooks/useFirebase";
 import {
   AiFillHome,
@@ -14,6 +14,7 @@ import {
 import { FaUserAlt } from "react-icons/fa";
 import SidebarListItem from "./ui/SidebarListItem";
 import { useState } from "react";
+
 export default function SideBar({
   sidebarOpen,
   setSidebarOpen,
@@ -110,7 +111,7 @@ export default function SideBar({
               className="text-fontActive text-[1.8rem] my-[8px]"
               onClick={handleLogOut}
             >
-              <BsFillGearFill />
+              <BiLogOut />
             </button>
           </div>
         </figure>
