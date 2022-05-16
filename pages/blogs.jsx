@@ -1,30 +1,11 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import SideBar from "../compos/SideBar";
+import PostTab from "../compos/PostTab";
 import HomeBlogs from "../compos/HomeBlogs";
-import { Group, Text } from "@mantine/core";
-import { Dropzone } from "@mantine/dropzone";
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [postTabOpen, setPostTabOpen] = useState(false);
-  const dropzoneContent = (status) => {
-    return (
-      <Group
-        position="center"
-        spacing="xl"
-        style={{ minHeight: 220, pointerEvents: "none" }}
-      >
-        <div>
-          <Text size="xl" inline>
-            Drag images here or click to select files
-          </Text>
-          <Text size="sm" color="dimmed" inline mt={7}>
-            Attach as many files as you like, each file should not exceed 5mb
-          </Text>
-        </div>
-      </Group>
-    );
-  };
   return (
     <>
       <Head>
@@ -42,17 +23,7 @@ export default function Home() {
           <HomeBlogs sidebarOpen={sidebarOpen} />
         </div>
       </div>
-      {!postTabOpen && (
-        <div className="top-[50%] left-[50%] absolute translate-y-[-50%] translate-x-[-50%] ">
-          <Dropzone
-            onDrop={(files) => console.log("accepted files", files)}
-            onReject={(files) => console.log("rejected files", files)}
-            maxSize={3 * 1024 ** 2}
-          >
-            {(status) => dropzoneContent(status)}
-          </Dropzone>
-        </div>
-      )}
+      {!postTabOpen && <PostTab />}
     </>
   );
 }
