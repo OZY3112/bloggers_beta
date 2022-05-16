@@ -21,7 +21,7 @@ const PostTab = () => {
   };
   return (
     <div className="w-full h-full ">
-      <div className="blur-sm top-0 left-0 absolute h-screen w-screen bg-[#3c3c3cc2] z-10" />
+      <div className="blur-3xl top-0 left-0 absolute h-screen w-screen bg-[#838383a4] z-10" />
       <div className="top-[50%] z-20 left-[50%] absolute translate-y-[-50%] translate-x-[-50%] ">
         
         <Dropzone

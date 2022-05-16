@@ -19,6 +19,8 @@ import {
   getFirestore,
   collection,
   addDoc,
+  doc,
+  setDoc,
   getDoc,
   getDocs,
   updateDoc,
@@ -30,7 +32,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth();
 const googleAuthProvider = new GoogleAuthProvider();
-//addDoc(collection(db, "example"), {info}, "name of doc")
 
 const useFirebase = () => {
   const useAuth = () => {
@@ -46,17 +47,13 @@ const useFirebase = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const [PhotoUrl, setPhotoUrl] = useState();
-  const usersColRes = collection(db, "users");
-  const blogsColRes = collection(db, "blogs");
+  const [followersArray, setFollowersArray] = useState([]);
+  const [followingArray, setFollowingArray] = useState([]);
+  const [likesArray, setLikesArray] = useState([]);
   const userName = currentUser?.displayName;
-
+  const userEmail = currentUser?.email;
+  const blogsColRef = collection(db, "blogs");
   const router = useRouter();
-  const handleLogOut = () => {
-    return signOut(auth);
-  };
-  const handleGoogleAuth = () => {
-    return signInWithPopup(auth, googleAuthProvider);
-  };
 
   const checkCurrentUser = () => {
     // if (currentUser) {
@@ -65,10 +62,36 @@ const useFirebase = () => {
     //   router.push("/login");
     // }
   };
+
+  const handleLogOut = () => {
+    return signOut(auth);
+  };
+  const AddNewUserDoc = async () => {
+    const userUid = currentUser?.uid;
+    const usersColRef = doc(db, "users", userUid);
+    await setDoc(usersColRef, {
+      name: userName,
+      pfp: PhotoUrl,
+      email: userEmail,
+      uid: userUid,
+      provider: currentUser?.providerId,
+      followers: followersArray,
+      following: followingArray,
+      likes: likesArray,
+    });
+  };
+
+  const handleGoogleAuth = () => {
+    signInWithPopup(auth, googleAuthProvider)
+      .then(() => AddNewUserDoc())
+      .then(() => checkCurrentUser());
+  };
+
   useEffect(() => {
     setPhotoUrl(currentUser?.photoURL);
   }, [currentUser]);
 
+  //posts configuration
   const [postType, setPostType] = useState("");
 
   return {

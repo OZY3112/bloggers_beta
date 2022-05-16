@@ -24,16 +24,14 @@ export default function SideBar({
   setPostTabOpen: (postTabOpen: boolean) => void;
 }) {
   const [dropDownOpen, setDropDownOpen] = useState(false);
-  const { PhotoUrl, userName } = useFirebase();
+  const { PhotoUrl, userName, handleLogOut } = useFirebase();
   const date = new Date();
   const noUserPfp: string =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM2VR27b_2TRmQQmTK3rMt8xNxUedXsodYg2Q2nUcH4XwCU0de4dvhK8vlhDChqcoM0Qs&usqp=CAU";
 
   return (
     <section
-      className={` h-screen duration-200 ${
-        sidebarOpen ? "w-1/5" : "w-[8%]"
-      }`}
+      className={` h-screen duration-200 ${sidebarOpen ? "w-1/5" : "w-[8%]"}`}
     >
       <div className="overflow-hidden bg-pri h-full rounded-r-[22px] p-[1rem] relative">
         <ul className=" mx-[1rem] my-[2rem] ">
@@ -108,7 +106,10 @@ export default function SideBar({
             </div>
           )}
           <div className="">
-            <button className="text-fontActive text-[1.8rem] my-[8px]  ">
+            <button
+              className="text-fontActive text-[1.8rem] my-[8px]"
+              onClick={handleLogOut}
+            >
               <BsFillGearFill />
             </button>
           </div>
