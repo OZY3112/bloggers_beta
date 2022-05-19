@@ -23,7 +23,7 @@ export default function Home() {
           <HomeBlogs sidebarOpen={sidebarOpen} />
         </div>
       </div>
-      {postTabOpen && <PostTab />}
+      {postTabOpen && <PostTab setPostTabOpen={setPostTabOpen} />}
     </>
   );
 }

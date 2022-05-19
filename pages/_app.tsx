@@ -9,8 +9,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [currentUser]);
 
   useEffect(() => {
-    getUserDoc();
-  }, []);
+    if (currentUser) {
+      getUserDoc();
+    }
+  }, [currentUser]);
   return (
     <>
       <Component {...pageProps} />

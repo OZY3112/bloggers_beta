@@ -1,6 +1,10 @@
 import { Group, Text } from "@mantine/core";
 import { Dropzone } from "@mantine/dropzone";
-const PostTab = () => {
+const PostTab = ({
+  setPostTabOpen,
+}: {
+  setPostTabOpen: (open: boolean) => void;
+}) => {
   const dropzoneContent = (status: any) => {
     return (
       <Group
@@ -20,10 +24,12 @@ const PostTab = () => {
     );
   };
   return (
-    <div className="w-full h-full ">
-      <div className="blur-3xl top-0 left-0 absolute h-screen w-screen bg-[#838383a4] z-10" />
+    <div className="w-full h-full animate-fade ">
+      <div
+        onClick={() => setPostTabOpen(false)}
+        className=" top-0 left-0 absolute h-screen w-screen bg-[#000000a4] z-10"
+      />
       <div className="top-[50%] z-20 left-[50%] absolute translate-y-[-50%] translate-x-[-50%] ">
-        
         <Dropzone
           onDrop={(files) => console.log("accepted files", files)}
           onReject={(files) => console.log("rejected files", files)}

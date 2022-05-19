@@ -59,23 +59,23 @@ const useFirebase = () => {
   const [followersArray, setFollowersArray] = useState([]);
   const [followingArray, setFollowingArray] = useState([]);
   const [likesArray, setLikesArray] = useState([]);
+  const [userDoc, setUserDoc] = useState([]);
   let userName = currentUser?.displayName;
   let userEmail = currentUser?.email;
   let userUid = currentUser?.uid;
-  const blogsColRef = collection(db, "blogs");
   const usersColRef = collection(db, "users");
   const router = useRouter();
 
   const checkCurrentUser = () => {
-    // if (currentUser) {
-    //   router.push("/blogs");
-    // } else {
-    //   router.push("/login");
-    // }
+    if (currentUser) {
+      router.push("/blogs");
+    } else {
+      router.push("/login");
+    }
   };
 
   const handleLogOut = () => {
-    return signOut(auth);
+    return signOut(auth).then(() => setUserDoc([]));
   };
   const AddNewUserDoc = async () => {
     const userUid = currentUser?.uid;
@@ -91,22 +91,20 @@ const useFirebase = () => {
       likes: likesArray,
     });
   };
-  const [userDoc, setUserDoc] = useState([]);
   const getUserDoc = async () => {
-    if (userUid) {
-      const q = query(usersColRef, where("uid", "==", userUid));
-      const data = await getDocs(q);
-      console.log(data)
-      console.log(data.docs.map((user) => ({ ...user.data(), id: user.uid })));
-      setUserDoc(data.docs.map((user) => ({ ...user.data(), id: user.uid })));
-    }
+    const q = query(usersColRef, where("uid", "==", userUid));
+    const data = await getDocs(q);
+    setUserDoc(data.docs.map((user) => ({ ...user.data(), id: user.uid })));
   };
-  // console.log(userDoc);
+  console.log(userDoc);
 
   const handleGoogleAuth = () => {
     signInWithPopup(auth, googleAuthProvider)
-      .then(() => checkCurrentUser().catch((err) => console.log("err", err)))
-      .then(() => AddNewUserDoc());
+      .then(() => {
+        checkCurrentUser();
+        AddNewUserDoc();
+      })
+      .catch((err) => console.log("err", err));
   };
 
   useEffect(() => {
@@ -114,6 +112,7 @@ const useFirebase = () => {
   }, [currentUser]);
 
   //posts configuration
+  const postsColRef = collection(db, "ports");
   const [postType, setPostType] = useState("");
 
   return {
@@ -122,6 +121,7 @@ const useFirebase = () => {
     loading,
     PhotoUrl,
     userName,
+    userDoc,
     checkCurrentUser,
     handleLogOut,
     handleGoogleAuth,
