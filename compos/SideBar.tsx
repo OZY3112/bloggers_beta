@@ -56,7 +56,7 @@ export default function SideBar({
           />
           <SidebarListItem
             sidebarOpen={sidebarOpen}
-            title="Global chat"
+            title="Chat"
             logo={<BsFillChatFill />}
           />
           <SidebarListItem

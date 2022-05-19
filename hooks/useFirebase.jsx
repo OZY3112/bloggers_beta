@@ -96,7 +96,7 @@ const useFirebase = () => {
     const data = await getDocs(q);
     setUserDoc(data.docs.map((user) => ({ ...user.data(), id: user.uid })));
   };
-  console.log(userDoc);
+  // console.log(userDoc);
 
   const handleGoogleAuth = () => {
     signInWithPopup(auth, googleAuthProvider)
@@ -114,6 +114,22 @@ const useFirebase = () => {
   //posts configuration
   const postsColRef = collection(db, "ports");
   const [postType, setPostType] = useState("");
+  /*
+  types of posts:
+  --code
+  --photo
+  --text
+
+  ex:
+  {type: "code || photo || text", content: "", imageUrl || code || null: ""}
+  use the storage bucket from firebase to store images, get their urls, 
+  reference them in the posts collection.
+
+  thought:
+  remember to use highlight.js to highlight code posts
+  should i added code posts?
+  maybe as a extra feature
+  */
 
   return {
     currentUser,
