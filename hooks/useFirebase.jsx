@@ -67,11 +67,11 @@ const useFirebase = () => {
   const router = useRouter();
 
   const checkCurrentUser = () => {
-    if (currentUser) {
-      router.push("/blogs");
-    } else {
-      router.push("/login");
-    }
+    // if (currentUser) {
+    //   router.push("/blogs");
+    // } else {
+    //   router.push("/login");
+    // }
   };
 
   const handleLogOut = () => {
@@ -113,7 +113,7 @@ const useFirebase = () => {
 
   //posts configuration
   const postsColRef = collection(db, "ports");
-  const [postType, setPostType] = useState("");
+  const [postType, setPostType] = useState("photo");
   /*
   types of posts:
   --code
@@ -138,6 +138,8 @@ const useFirebase = () => {
     PhotoUrl,
     userName,
     userDoc,
+    postType,
+    setPostType,
     checkCurrentUser,
     handleLogOut,
     handleGoogleAuth,

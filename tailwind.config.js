@@ -46,10 +46,28 @@ module.exports = {
             opacity: 0,
           },
         },
+        "scale-in": {
+          "0%": {
+            scale: "0.8",
+          },
+          "100%": {
+            scale: 1,
+          },
+        },
+        "scale-out": {
+          "0%": {
+            scale: 1,
+          },
+          "100%": {
+            scale: "0.8",
+          },
+        },
       },
       animation: {
         fadein: "fade-in 0.2s forwards ease-in-out",
         fadeout: "fade-out 0.2s forwards ease-in-out",
+        scalein: "scale-in 0.2s forwards ease-in-out",
+        scaleout: "scale-out 0.2s forwards ease-in-out",
       },
     },
     plugins: [],
