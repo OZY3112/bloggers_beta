@@ -1,7 +1,8 @@
-import { Group, Text } from "@mantine/core";
 import { Dropzone } from "@mantine/dropzone";
+import { Group, Stepper, Text, Pagination } from "@mantine/core";
 import { useState } from "react";
 import useFirebase from "../hooks/useFirebase";
+
 const PostTab = ({
   setPostTabOpen,
 }: {
@@ -9,6 +10,7 @@ const PostTab = ({
 }) => {
   const { postType, setPostType } = useFirebase();
   const [animationDelay, setAnimationDelay] = useState(false);
+  const [postPage, setPostPage] = useState(1);
 
   const dropzoneContent = (status: any) => {
     return (
@@ -27,19 +29,70 @@ const PostTab = ({
         </div>
       </Group>
     );
-    /*
-    add pagination to all states of the post tab:
-    --post type:
-    add a button for each choice:
-    photo
-    code
-    text
-    --post caption:
-    field to add caption
-    --post content:
-    optional: field to add content
-    
-    */
+  };
+  /*
+  add pagination to all states of the post tab:
+  --post type:
+  add a button for each choice:
+  photo
+  code
+  text
+  --post caption:
+  field to add caption
+  --post content:
+  optional: field to add content
+  
+  */
+
+  const PostTypePage = () => {
+    return (
+      <div className="">
+        <h1 className="">what type of post would you like to post?</h1>
+        <div className="flex">
+          <button className="form-btn" onClick={() => setPostType("photo")}>
+            Photo
+          </button>
+          <button className="form-btn" onClick={() => setPostType("code")}>
+            Code
+          </button>
+          <button className="form-btn" onClick={() => setPostType("text")}>
+            text
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  const PostCaptionPage = () => {
+    return <div></div>;
+  };
+
+  const PostConformPage = () => {
+    return <div></div>;
+  };
+
+  const [activePage, setPage] = useState(1);
+  const [active, setActive] = useState(1);
+  const nextStep = () =>
+    setActive((current) => (current < 3 ? current + 1 : current));
+  const prevStep = () =>
+    setActive((current) => (current > 0 ? current - 1 : current));
+  const PaginationSetup = () => {
+    return (
+      <>
+        <Pagination
+          page={activePage}
+          onChange={setPage}
+          total={3}
+          initialPage={1}
+          radius="xl"
+          withControls={false}
+        />
+        <Text mb={10} mt={30}>
+          <PostTypePage />
+        </Text>
+      </>
+    );
   };
   return (
     <div
@@ -62,25 +115,12 @@ const PostTab = ({
             animationDelay ? "animate-scaleout" : "animate-scalein"
           }`}
         >
-          <div className="w-1/2">
+          <div className="w-full">
             <div className="">
-              <div className="">
-                <h1 className="">what type of post would you like to post?</h1>
-                {/* <select
-                  className=""
-                  onChange={(e) => setPostType(e.target.value)}
-                >
-                  <option value="photo">Photo</option>
-                  <option value="code">Code</option>
-                  <option value="text">text</option>
-                </select> */}
-                <button onChange={() => setPostType("photo")}>Photo</button>
-                <button onChange={() => setPostType("code")}>Code</button>
-                <button onChange={() => setPostType("text")}>text</button>
-              </div>
+              <PaginationSetup />
             </div>
           </div>
-          {postType === "photo" && (
+          {/* {postType === "photo" && (
             <Dropzone
               onDrop={(files) => console.log("accepted files", files)}
               onReject={(files) => console.log("rejected files", files)}
@@ -89,7 +129,7 @@ const PostTab = ({
             >
               {(status) => dropzoneContent(status)}
             </Dropzone>
-          )}
+          )} */}
           {postType === "code" && (
             <div className="w-1/2">
               <textarea
