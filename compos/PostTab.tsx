@@ -1,5 +1,5 @@
 import { Dropzone } from "@mantine/dropzone";
-import { Group, Stepper, Text, Pagination } from "@mantine/core";
+import { Group, Stepper, Text } from "@mantine/core";
 import { useState } from "react";
 import useFirebase from "../hooks/useFirebase";
 
@@ -71,26 +71,45 @@ const PostTab = ({
     return <div></div>;
   };
 
-  const [activePage, setPage] = useState(1);
   const [active, setActive] = useState(1);
   const nextStep = () =>
     setActive((current) => (current < 3 ? current + 1 : current));
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
-  const PaginationSetup = () => {
+
+  const StepperSetup = () => {
     return (
       <>
-        <Pagination
-          page={activePage}
-          onChange={setPage}
-          total={3}
-          initialPage={1}
-          radius="xl"
-          withControls={false}
-        />
-        <Text mb={10} mt={30}>
-          <PostTypePage />
-        </Text>
+        <Stepper active={active} onStepClick={setActive} breakpoint="sm">
+          <Stepper.Step
+            breakpoint="sm"
+            label="First"
+            description="Select the type of post you would like to post"
+          >
+            <PostTypePage />
+          </Stepper.Step>
+          <Stepper.Step
+            breakpoint="sm"
+            label="Then"
+            description="Add a caption to your post"
+          >
+            <PostCaptionPage />
+          </Stepper.Step>
+          <Stepper.Step
+            breakpoint="sm"
+            label="Lastly"
+            description="Confirm your post"
+          >
+            <PostConformPage />
+          </Stepper.Step>
+          <Stepper.Completed
+            breakpoint="sm"
+            label="First"
+            description="Select the type of post you would like to post"
+          >
+            <PostTypePage />
+          </Stepper.Completed>
+        </Stepper>
       </>
     );
   };
@@ -117,7 +136,7 @@ const PostTab = ({
         >
           <div className="w-full">
             <div className="">
-              <PaginationSetup />
+              <StepperSetup />
             </div>
           </div>
           {/* {postType === "photo" && (
