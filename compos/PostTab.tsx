@@ -8,7 +8,8 @@ const PostTab = ({
 }: {
   setPostTabOpen: (open: boolean) => void;
 }) => {
-  const { postType, setPostType } = useFirebase();
+  const { usePostTab } = useFirebase();
+  const { handlePost, setPostType, postType } = usePostTab();
   const [animationDelay, setAnimationDelay] = useState(false);
   const [postPage, setPostPage] = useState(1);
 

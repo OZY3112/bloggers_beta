@@ -114,13 +114,20 @@ const useFirebase = () => {
   //posts configuration
   const postsColRef = collection(db, "ports");
   const [postType, setPostType] = useState("photo");
+  const usePostTab = () => {
+    const [currentStage, setCurrentStage] = useState(1);
+    const changeSTage = () => {
+      
+    }
+    const handlePost = () => {};
+    return { handlePost, setPostType, postType };
+  };
   /*
   types of posts:
   --code
   --photo
   --text
 
-  ex:
   {type: "code || photo || text", content: "", imageUrl || code || null: ""}
   use the storage bucket from firebase to store images, get their urls, 
   reference them in the posts collection.
@@ -138,8 +145,7 @@ const useFirebase = () => {
     PhotoUrl,
     userName,
     userDoc,
-    postType,
-    setPostType,
+    usePostTab,
     checkCurrentUser,
     handleLogOut,
     handleGoogleAuth,
