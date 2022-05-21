@@ -35,6 +35,7 @@ import {
   where,
   deleteDoc,
 } from "firebase/firestore";
+// import {} 'firebase/storage'
 import { useState, useEffect, useTransition } from "react";
 
 const db = getFirestore(app);
@@ -113,14 +114,28 @@ const useFirebase = () => {
 
   //posts configuration
   const postsColRef = collection(db, "ports");
-  const [postType, setPostType] = useState("photo");
+  const [postType, setPostType] = useState("");
   const usePostTab = () => {
+    const [loading, setLoading] = useState(false);
     const [currentStage, setCurrentStage] = useState(1);
+    const [postContent, setPostContent] = useState("");
+    const postAndGetImageUrl = () => {};
     const changeSTage = () => {
-      
-    }
+      if (postType === "") {
+        setLoading(true);
+        setCurrentStage(1);
+        setLoading(false);
+      } else if (postType !== "") {
+        setLoading(true);
+        if (postType === "image") {
+          postAndGetImageUrl();
+        }
+        setCurrentStage(2);
+        setLoading(false);
+      }
+    };
     const handlePost = () => {};
-    return { handlePost, setPostType, postType };
+    return { handlePost, setPostType, currentStage, postType };
   };
   /*
   types of posts:
