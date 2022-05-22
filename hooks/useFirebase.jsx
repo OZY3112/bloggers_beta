@@ -36,6 +36,8 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 // import {} 'firebase/storage'
+import { Dropzone } from "@mantine/dropzone";
+import { Group, Text } from "@mantine/core";
 import { useState, useEffect, useTransition } from "react";
 
 const db = getFirestore(app);
@@ -119,23 +121,100 @@ const useFirebase = () => {
     const [loading, setLoading] = useState(false);
     const [currentStage, setCurrentStage] = useState(1);
     const [postContent, setPostContent] = useState("");
+    const nextStage = () => setCurrentStage(currentStage + 1);
+    const prevStage = () => setCurrentStage(currentStage - 1);
     const postAndGetImageUrl = () => {};
-    const changeSTage = () => {
-      if (postType === "") {
-        setLoading(true);
-        setCurrentStage(1);
-        setLoading(false);
-      } else if (postType !== "") {
-        setLoading(true);
-        if (postType === "image") {
-          postAndGetImageUrl();
+    const Stages = () => {
+      if (currentStage === 1) {
+        return (
+          <div className="">
+            <h1 className="">what type of post would you like to post?</h1>
+            <div className="flex">
+              <button
+                className="form-btn"
+                onClick={() => {
+                  setPostType("photo");
+                  nextStage();
+                }}
+              >
+                Photo
+              </button>
+              <button
+                className="form-btn"
+                onClick={() => {
+                  setPostType("code");
+                  nextStage();
+                }}
+              >
+                Code
+              </button>
+              <button
+                className="form-btn"
+                onClick={() => {
+                  setPostType("text");
+                  nextStage();
+                }}
+              >
+                text
+              </button>
+            </div>
+          </div>
+        );
+      } else if (currentStage === 2) {
+        if (postType === "photo") {
+          const dropzoneContent = (status) => {
+            return (
+              <Group
+                position="center"
+                spacing="xl"
+                style={{ minHeight: 220, pointerEvents: "none" }}
+              >
+                <div>
+                  <Text size="xl" inline>
+                    Drag images here or click to select files
+                  </Text>
+                  <Text size="sm" color="dimmed" inline mt={7}>
+                    you can only submit 1 image per post
+                  </Text>
+                </div>
+              </Group>
+            );
+          };
+          return (
+            <Dropzone
+              onDrop={(files) => console.log("accepted files", files)}
+              onReject={(files) => console.log("rejected files", files)}
+              maxSize={3 * 1024 ** 2}
+              className={` w-1/2 rounded-xl `}
+            >
+              {(status) => dropzoneContent(status)}
+            </Dropzone>
+          );
+        } else if (postType === "code") {
+          return (
+            <div className="w-1/2">
+              <textarea
+                className="w-full h-full rounded-xl"
+                placeholder="Write your code here"
+              />
+            </div>
+          );
+        } else if (postType === "text") {
+          return;
         }
-        setCurrentStage(2);
-        setLoading(false);
+      } else if (currentStage === 3) {
       }
     };
     const handlePost = () => {};
-    return { handlePost, setPostType, currentStage, postType };
+    return {
+      handlePost,
+      setPostType,
+      nextStage,
+      prevStage,
+      Stages,
+      currentStage,
+      postType,
+    };
   };
   /*
   types of posts:
