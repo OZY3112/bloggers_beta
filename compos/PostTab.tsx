@@ -7,23 +7,9 @@ const PostTab = ({
 }) => {
   const [animationDelay, setAnimationDelay] = useState(false);
 
-  /*
-  add pagination to all states of the post tab:
-  --post type:
-  add a button for each choice:
-  photo
-  code
-  text
-  --post caption:
-  field to add caption
-  --post content:
-  optional: field to add content
-  
-  */
-
   return (
     <div
-      className={`w-full h-full ${
+      className={`w-full h-full fixed ${
         animationDelay ? "animate-fadeout" : "animate-fadein"
       }`}
     >

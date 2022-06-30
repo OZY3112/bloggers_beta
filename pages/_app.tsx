@@ -46,7 +46,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </ChakraProvider>
       </SupaProvider>
-      );
     </>
   );
 }

@@ -11,7 +11,7 @@ import {
   AiOutlineMenuFold,
 } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
-import { LinkType, SidebarListItem } from "./ui/SidebarListItem";
+import { LinkType, SidebarListItem, PostTabLink } from "./ui/SidebarListItem";
 import { useState } from "react";
 
 const links: LinkType[] = [
@@ -26,6 +26,12 @@ const links: LinkType[] = [
   {
     title: "Profile",
     logo: <FaUserAlt />,
+  },
+];
+const postTab: LinkType[] = [
+  {
+    title: "post",
+    logo: <BsFillSignpostFill />,
   },
 ];
 
@@ -45,7 +51,9 @@ export default function SideBar({
 
   return (
     <section
-      className={` h-screen duration-200 ${sidebarOpen ? "w-1/5" : "w-[8%]"}`}
+      className={` fixed left-0 h-screen duration-200 ${
+        sidebarOpen ? "w-1/5" : "w-[8%]"
+      }`}
     >
       <div className="overflow-hidden bg-pri h-full rounded-r-[22px] p-[1rem] relative">
         <ul className=" mx-[1rem] my-[2rem] ">
@@ -65,24 +73,14 @@ export default function SideBar({
           {links.map((link, i) => (
             <SidebarListItem link={link} sidebarOpen={sidebarOpen} key={i} />
           ))}
-
-          <li
-            className=" duration-300 py-2 bg-acs  hover:bg-acsActive rounded-3xl "
-            onClick={() => setPostTabOpen(true)}
-          >
-            <div className=" px-3 flex text-font duration-300 hover:text-fontActive mb-2 gap-3  ">
-              <p
-                className={`my-auto text-[1.8rem] text-fontActive ${
-                  !sidebarOpen && "mx-auto"
-                } `}
-              >
-                <BsFillSignpostFill />
-              </p>
-              {sidebarOpen && (
-                <p className="my-auto text-[1.5rem font-thine "> Post </p>
-              )}
-            </div>
-          </li>
+          {postTab.map((link, i) => (
+            <PostTabLink
+              setPostTabOpen={setPostTabOpen}
+              sidebarOpen={sidebarOpen}
+              link={link}
+              key={i}
+            />
+          ))}
         </ul>
 
         <figure
