@@ -1,8 +1,6 @@
 import { BiSearch } from "react-icons/bi";
 import { WiSunrise, WiMoonrise } from "react-icons/wi";
-import useFirebase from "../../hooks/useFirebase";
 export default function Nav() {
-  const { userName } = useFirebase();
   return (
     <nav className=" flex justify-around mt-8 font-roboto-slab ">
       <h4 className=" flex text-xl text-3xl ">
@@ -11,7 +9,7 @@ export default function Nav() {
           {/* for darkmode <WiMoonrise /> */}
         </span>
         <span className="font-bold  my-auto"> Good morning</span>
-        <span className="font-open-sans  my-auto">, {userName}</span>
+        {/* <span className="font-open-sans  my-auto">, {userName}</span> */}
       </h4>
       <div className=" relative ">
         <input

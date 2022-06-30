@@ -1,15 +1,10 @@
-import { Dropzone } from "@mantine/dropzone";
-import { Group, Stepper, Text } from "@mantine/core";
 import { useState } from "react";
-import useFirebase from "../hooks/useFirebase";
 
 const PostTab = ({
   setPostTabOpen,
 }: {
   setPostTabOpen: (open: boolean) => void;
 }) => {
-  const { usePostTab } = useFirebase();
-  const { handlePost, Stages }: any = usePostTab();
   const [animationDelay, setAnimationDelay] = useState(false);
 
   /*
@@ -48,9 +43,7 @@ const PostTab = ({
           }`}
         >
           <div className="w-full">
-            <div className="">
-              <Stages />
-            </div>
+            <div className=""></div>
           </div>
         </div>
       </div>

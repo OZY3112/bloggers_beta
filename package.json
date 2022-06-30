@@ -9,17 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@babel/core": ">=7.0.0 <8.0.0",
+    "@chakra-ui/react": "^2.2.1",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
     "@mantine/core": "^4.2.5",
     "@mantine/dropzone": "^4.2.5",
     "@mantine/hooks": "^4.2.5",
+    "@supabase/supabase-js": "^1.35.4",
     "cypress": "^9.6.1",
-    "firebase": "^9.8.1",
+    "framer-motion": "^6",
     "highlight.js": "^11.5.1",
     "jest": "^28.1.0",
-    "next": "12.1.6",
-    "react": "18.1.0",
-    "react-dom": "18.1.0",
-    "react-icons": "^4.3.1"
+    "next": "12.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.3.1",
+    "react-supabase": "^0.2.0"
   },
   "devDependencies": {
     "@types/node": "17.0.32",

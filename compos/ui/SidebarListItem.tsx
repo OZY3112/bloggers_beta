@@ -1,10 +1,15 @@
-export default function SidebarListItem({
-  logo,
-  title,
+import { ReactNode } from "react";
+
+export type LinkType = {
+  title: string;
+  logo: ReactNode;
+};
+
+export function SidebarListItem({
+  link,
   sidebarOpen,
 }: {
-  logo: React.ReactNode;
-  title: string;
+  link: any;
   sidebarOpen: boolean;
 }) {
   return (
@@ -15,11 +20,10 @@ export default function SidebarListItem({
             !sidebarOpen && "mx-auto"
           } `}
         >
-          {" "}
-          {logo}{" "}
+          {link.logo}
         </p>
         {sidebarOpen && (
-          <p className="my-auto text-[1.5rem font-thine"> {title} </p>
+          <p className="my-auto text-[1.5rem font-thine"> {link.title} </p>
         )}
       </div>
     </li>

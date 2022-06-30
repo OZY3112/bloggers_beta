@@ -5,15 +5,29 @@ import {
   BsThreeDotsVertical,
 } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
-import useFirebase from "../hooks/useFirebase";
 import {
   AiFillHome,
   AiOutlineMenuUnfold,
   AiOutlineMenuFold,
 } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
-import SidebarListItem from "./ui/SidebarListItem";
+import { LinkType, SidebarListItem } from "./ui/SidebarListItem";
 import { useState } from "react";
+
+const links: LinkType[] = [
+  {
+    title: "Blogs",
+    logo: <AiFillHome />,
+  },
+  {
+    title: "Chat",
+    logo: <BsFillChatFill />,
+  },
+  {
+    title: "Profile",
+    logo: <FaUserAlt />,
+  },
+];
 
 export default function SideBar({
   sidebarOpen,
@@ -25,7 +39,6 @@ export default function SideBar({
   setPostTabOpen: (postTabOpen: boolean) => void;
 }) {
   const [dropDownOpen, setDropDownOpen] = useState(false);
-  const { PhotoUrl, userName, handleLogOut } = useFirebase();
   const date = new Date();
   const noUserPfp: string =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM2VR27b_2TRmQQmTK3rMt8xNxUedXsodYg2Q2nUcH4XwCU0de4dvhK8vlhDChqcoM0Qs&usqp=CAU";
@@ -49,21 +62,9 @@ export default function SideBar({
             </div>
           </li>
 
-          <SidebarListItem
-            sidebarOpen={sidebarOpen}
-            title="Blogs"
-            logo={<AiFillHome />}
-          />
-          <SidebarListItem
-            sidebarOpen={sidebarOpen}
-            title="Chat"
-            logo={<BsFillChatFill />}
-          />
-          <SidebarListItem
-            sidebarOpen={sidebarOpen}
-            title="Profile"
-            logo={<FaUserAlt />}
-          />
+          {links.map((link, i) => (
+            <SidebarListItem link={link} sidebarOpen={sidebarOpen} key={i} />
+          ))}
 
           <li
             className=" duration-300 py-2 bg-acs  hover:bg-acsActive rounded-3xl "
@@ -91,7 +92,7 @@ export default function SideBar({
         >
           <div className="my-auto flex justify-center ">
             <Image
-              src={PhotoUrl ?? noUserPfp}
+              src={noUserPfp}
               alt="profile"
               className="rounded-full w-10 h-10"
               height={50}
@@ -100,17 +101,14 @@ export default function SideBar({
           </div>
           {sidebarOpen && (
             <div className="text-fontActive">
-              <h4 className="font-bold ">{userName}</h4>
+              {/* <h4 className="font-bold ">{userName}</h4> */}
               <h6 className="flex justify-center">
                 {date.getMonth() + 1} / {date.getDate()} / {date.getFullYear()}{" "}
               </h6>
             </div>
           )}
           <div className="">
-            <button
-              className="text-fontActive text-[1.8rem] my-[8px]"
-              onClick={handleLogOut}
-            >
+            <button className="text-fontActive text-[1.8rem] my-[8px]">
               <BiLogOut />
             </button>
           </div>
