@@ -1,39 +1,12 @@
 import Image from "next/image";
-import {
-  BsFillSignpostFill,
-  BsFillChatFill,
-  BsThreeDotsVertical,
-} from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
 import {
-  AiFillHome,
   AiOutlineMenuUnfold,
   AiOutlineMenuFold,
 } from "react-icons/ai";
-import { FaUserAlt } from "react-icons/fa";
-import { LinkType, SidebarListItem, PostTabLink } from "./ui/SidebarListItem";
+import { links, postTab, SidebarListItem, PostTabLink } from "./ui/SidebarListItem";
 import { useState } from "react";
 
-const links: LinkType[] = [
-  {
-    title: "Blogs",
-    logo: <AiFillHome />,
-  },
-  {
-    title: "Chat",
-    logo: <BsFillChatFill />,
-  },
-  {
-    title: "Profile",
-    logo: <FaUserAlt />,
-  },
-];
-const postTab: LinkType[] = [
-  {
-    title: "post",
-    logo: <BsFillSignpostFill />,
-  },
-];
 
 export default function SideBar({
   sidebarOpen,

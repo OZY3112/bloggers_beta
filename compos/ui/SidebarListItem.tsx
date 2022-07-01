@@ -1,9 +1,36 @@
 import { ReactNode } from "react";
-
-export type LinkType = {
+import { FaUserAlt } from "react-icons/fa";
+import {
+  BsFillSignpostFill,
+  BsFillChatFill,
+  BsThreeDotsVertical,
+} from "react-icons/bs";
+import { AiFillHome } from "react-icons/ai";
+type LinkType = {
   title: string;
   logo: ReactNode;
 };
+
+export const links: LinkType[] = [
+  {
+    title: "Blogs",
+    logo: <AiFillHome />,
+  },
+  {
+    title: "Chat",
+    logo: <BsFillChatFill />,
+  },
+  {
+    title: "Profile",
+    logo: <FaUserAlt />,
+  },
+];
+export const postTab: LinkType[] = [
+  {
+    title: "post",
+    logo: <BsFillSignpostFill />,
+  },
+];
 
 export function SidebarListItem({
   link,
