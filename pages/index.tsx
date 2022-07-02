@@ -14,7 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.svg" />
       </Head>
       <div className="">
-        <div className="flex w-screen bg-bg ">
+        <div className="flex w-screen  ">
           <SideBar
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}

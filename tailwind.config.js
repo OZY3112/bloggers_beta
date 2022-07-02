@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bg: "#f0f0f0",
+        bg: "#fafafa",
         bgSec: "#e3e3e3",
         pri: "#171717",
         priActive: "#292929",

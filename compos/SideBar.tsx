@@ -1,12 +1,8 @@
 import Image from "next/image";
 import { BiLogOut } from "react-icons/bi";
-import {
-  AiOutlineMenuUnfold,
-  AiOutlineMenuFold,
-} from "react-icons/ai";
-import { links, postTab, SidebarListItem, PostTabLink } from "./ui/SidebarListItem";
+import { AiOutlineMenuUnfold, AiOutlineMenuFold } from "react-icons/ai";
+import { links, SidebarListItem, PostTabLink } from "./ui/SidebarListItem";
 import { useState } from "react";
-
 
 export default function SideBar({
   sidebarOpen,
@@ -24,11 +20,12 @@ export default function SideBar({
 
   return (
     <section
-      className={` fixed left-0 h-screen duration-200 ${
+      className={` bg-bg fixed left-0 h-screen duration-200 ${
         sidebarOpen ? "w-1/5" : "w-[8%]"
       }`}
     >
-      <div className="overflow-hidden bg-pri h-full rounded-r-[22px] p-[1rem] relative">
+      <div className="overflow-hidden bg-pri h-full 
+      rounded-r-[22px] p-[1rem] relative">
         <ul className=" mx-[1rem] my-[2rem] ">
           <li
             className=" duration-300 py-2 rounded-3xl "
@@ -42,20 +39,14 @@ export default function SideBar({
               </p>
             </div>
           </li>
-
           {links.map((link, i) => (
             <SidebarListItem link={link} sidebarOpen={sidebarOpen} key={i} />
           ))}
-          {postTab.map((link, i) => (
-            <PostTabLink
-              setPostTabOpen={setPostTabOpen}
-              sidebarOpen={sidebarOpen}
-              link={link}
-              key={i}
-            />
-          ))}
+          <PostTabLink
+            setPostTabOpen={setPostTabOpen}
+            sidebarOpen={sidebarOpen}
+          />
         </ul>
-
         <figure
           className="  
          text-font justify-around py-3 border-font border-t-2 absolute bottom-[-8px]

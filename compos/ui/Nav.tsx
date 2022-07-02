@@ -5,7 +5,7 @@ export default function Nav() {
     <nav className="mb-12 flex justify-around mt-8 font-roboto-slab ">
       <h4 className=" flex text-xl text-3xl ">
         <span className="my-auto text-5xl text-yellow-500 transition-[300ms] hover:scale-[0.8] active:scale-[1.2] ">
-          <WiSunrise /> 
+          <WiSunrise />
           {/* for darkmode <WiMoonrise /> */}
         </span>
         <span className="font-bold  my-auto"> Good morning</span>

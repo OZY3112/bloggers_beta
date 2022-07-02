@@ -25,12 +25,6 @@ export const links: LinkType[] = [
     logo: <FaUserAlt />,
   },
 ];
-export const postTab: LinkType[] = [
-  {
-    title: "post",
-    logo: <BsFillSignpostFill />,
-  },
-];
 
 export function SidebarListItem({
   link,
@@ -68,11 +62,9 @@ export const PostTabLink = ({ setPostTabOpen, sidebarOpen, link }: any) => (
           !sidebarOpen && "mx-auto"
         } `}
       >
-        {link.logo}
+        <BsFillSignpostFill />
       </p>
-      {sidebarOpen && (
-        <p className="my-auto text-[1.5rem font-thine "> {link.title} </p>
-      )}
+      {sidebarOpen && <p className="my-auto text-[1.5rem font-thine ">post</p>}
     </div>
   </li>
 );
