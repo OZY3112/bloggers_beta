@@ -1,5 +1,9 @@
 import Head from "next/head";
+import { useGoogleLogin, GoogleLogin } from "@react-oauth/google";
 export default function Login() {
+  const login = useGoogleLogin({
+    onSuccess: (tokenResponse) => console.log(tokenResponse),
+  });
   return (
     <section className="">
       <Head>
@@ -10,9 +14,18 @@ export default function Login() {
       <div className="">
         <div className="">
           <div className="">
-            <button className="">
+            <button className="" onClick={() => login()}>
               Log in with Google
             </button>
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+                console.log(credentialResponse);
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+              useOneTap
+            />
           </div>
         </div>
         <div className="">

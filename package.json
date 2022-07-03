@@ -16,6 +16,7 @@
     "@mantine/core": "^4.2.5",
     "@mantine/dropzone": "^4.2.5",
     "@mantine/hooks": "^4.2.5",
+    "@react-oauth/google": "^0.2.6",
     "@supabase/supabase-js": "^1.35.4",
     "cypress": "^9.6.1",
     "framer-motion": "^6",

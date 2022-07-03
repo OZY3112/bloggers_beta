@@ -5,6 +5,7 @@ import { WiSunrise } from "react-icons/wi";
 import { Provider as SupaProvider } from "react-supabase";
 import { ChakraProvider } from "@chakra-ui/react";
 import supabase from "../hooks/supa";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 // const Loader: any = () => {
 //   const router = useRouter();
@@ -41,11 +42,24 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       {/* <Loader /> */}
-      <SupaProvider value={supabase}>
-        <ChakraProvider>
-          <Component {...pageProps} />
-        </ChakraProvider>
-      </SupaProvider>
+      <GoogleOAuthProvider clientId={`${process.env.GOOGLE_OAUTH_ID}`}>
+        <SupaProvider value={supabase}>
+          <ChakraProvider>
+            <Component {...pageProps} />
+            <div className="hidden">
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  console.log(credentialResponse);
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+                useOneTap
+              />
+            </div>
+          </ChakraProvider>
+        </SupaProvider>
+      </GoogleOAuthProvider>
     </>
   );
 }
