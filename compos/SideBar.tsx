@@ -3,6 +3,7 @@ import { BiLogOut } from "react-icons/bi";
 import { AiOutlineMenuUnfold, AiOutlineMenuFold } from "react-icons/ai";
 import { links, SidebarListItem, PostTabLink } from "./ui/SidebarListItem";
 import { useState } from "react";
+import { googleLogout } from "@react-oauth/google";
 
 export default function SideBar({
   sidebarOpen,
@@ -24,8 +25,10 @@ export default function SideBar({
         sidebarOpen ? "w-1/5" : "w-[8%]"
       }`}
     >
-      <div className="overflow-hidden bg-pri h-full 
-      rounded-r-[22px] p-[1rem] relative">
+      <div
+        className="overflow-hidden bg-pri h-full 
+      rounded-r-[22px] p-[1rem] relative"
+      >
         <ul className=" mx-[1rem] my-[2rem] ">
           <li
             className=" duration-300 py-2 rounded-3xl "
@@ -70,7 +73,10 @@ export default function SideBar({
             </div>
           )}
           <div className="">
-            <button className="text-fontActive text-[1.8rem] my-[8px]">
+            <button
+              className="text-fontActive text-[1.8rem] my-[8px]"
+              onClick={() => googleLogout()}
+            >
               <BiLogOut />
             </button>
           </div>

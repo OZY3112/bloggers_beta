@@ -6,6 +6,7 @@ import { Provider as SupaProvider } from "react-supabase";
 import { ChakraProvider } from "@chakra-ui/react";
 import supabase from "../hooks/supa";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import useApp from "../hooks/useApp";
 
 // const Loader: any = () => {
 //   const router = useRouter();
@@ -39,6 +40,7 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 // };
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const { decodeCredentials } = useApp();
   return (
     <>
       {/* <Loader /> */}
@@ -48,12 +50,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
             <div className="hidden">
               <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  console.log(credentialResponse);
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
+                onSuccess={(res) => decodeCredentials(res)}
+                onError={() => {}}
                 useOneTap
               />
             </div>

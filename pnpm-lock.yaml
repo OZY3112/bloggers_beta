@@ -20,6 +20,7 @@ specifiers:
   framer-motion: ^6
   highlight.js: ^11.5.1
   jest: ^28.1.0
+  jwt-decode: ^3.1.2
   next: 12.2.0
   postcss: ^8.4.13
   react: 18.2.0
@@ -43,6 +44,7 @@ dependencies:
   framer-motion: 6.3.16_biqbaboplfbrettd7655fr4n2y
   highlight.js: 11.5.1
   jest: 28.1.0_@types+node@17.0.32
+  jwt-decode: 3.1.2
   next: 12.2.0_yhyduge2v55qxhiqgmv6aq2vr4
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -4732,6 +4734,10 @@ packages:
       array-includes: 3.1.5
       object.assign: 4.1.2
     dev: true
+
+  /jwt-decode/3.1.2:
+    resolution: {integrity: sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==}
+    dev: false
 
   /kleur/3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
