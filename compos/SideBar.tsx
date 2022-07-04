@@ -15,6 +15,7 @@ export default function SideBar({
   setPostTabOpen: (postTabOpen: boolean) => void;
 }) {
   const { currentUser }: any = useApp();
+  console.log(currentUser);
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const date = new Date();
   const noUserPfp: string =

@@ -8,6 +8,7 @@ import supabase from "../hooks/supa";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import useApp from "../hooks/useApp";
 import useAuthStore from "../stores/authStore";
+import jwt_decode from "jwt-decode";
 
 // const Loader: any = () => {
 //   const router = useRouter();
@@ -41,7 +42,7 @@ import useAuthStore from "../stores/authStore";
 // };
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { addAndDecodeUserCredentials } = useApp();
+  const { setCurrentUser }: any = useApp();
   const { addUser }: any = useAuthStore();
   return (
     <>
@@ -50,9 +51,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         <SupaProvider value={supabase}>
           <ChakraProvider>
             <Component {...pageProps} />
-            <div className="hidden">
+            <div className="">
               <GoogleLogin
-                onSuccess={(res) => addAndDecodeUserCredentials(res, addUser)}
+                onSuccess={(res: any) => {
+                  console.log(res);
+                  const decoded: any = jwt_decode(res.credential);
+                  setCurrentUser(decoded);
+                }}
                 onError={() => {}}
                 useOneTap
               />

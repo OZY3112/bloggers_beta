@@ -12,7 +12,9 @@ export default function Nav() {
           {/* for darkmode <WiMoonrise /> */}
         </span>
         <span className="font-bold  my-auto"> Good morning</span>
-        <span className="font-open-sans  my-auto">, {currentUser?.name}</span>
+        <span className="font-open-sans  my-auto">
+          , {currentUser.name ?? "no name"}
+        </span>
       </h4>
       <div className=" relative ">
         <input
