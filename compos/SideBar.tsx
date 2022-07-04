@@ -4,7 +4,7 @@ import { AiOutlineMenuUnfold, AiOutlineMenuFold } from "react-icons/ai";
 import { links, SidebarListItem, PostTabLink } from "./ui/SidebarListItem";
 import { useState } from "react";
 import { googleLogout } from "@react-oauth/google";
-
+import useApp from "../hooks/useApp";
 export default function SideBar({
   sidebarOpen,
   setSidebarOpen,
@@ -14,6 +14,7 @@ export default function SideBar({
   setSidebarOpen: (sidebarOpen: boolean) => void;
   setPostTabOpen: (postTabOpen: boolean) => void;
 }) {
+  const { currentUser }: any = useApp();
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const date = new Date();
   const noUserPfp: string =
@@ -57,7 +58,7 @@ export default function SideBar({
         >
           <div className="my-auto flex justify-center ">
             <Image
-              src={noUserPfp}
+              src={currentUser.picture ?? noUserPfp}
               alt="profile"
               className="rounded-full w-10 h-10"
               height={50}

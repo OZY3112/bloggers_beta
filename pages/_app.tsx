@@ -7,6 +7,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import supabase from "../hooks/supa";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import useApp from "../hooks/useApp";
+import useAuthStore from "../stores/authStore";
 
 // const Loader: any = () => {
 //   const router = useRouter();
@@ -40,7 +41,8 @@ import useApp from "../hooks/useApp";
 // };
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { decodeCredentials } = useApp();
+  const { addAndDecodeUserCredentials } = useApp();
+  const { addUser }: any = useAuthStore();
   return (
     <>
       {/* <Loader /> */}
@@ -50,7 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
             <div className="hidden">
               <GoogleLogin
-                onSuccess={(res) => decodeCredentials(res)}
+                onSuccess={(res) => addAndDecodeUserCredentials(res, addUser)}
                 onError={() => {}}
                 useOneTap
               />
