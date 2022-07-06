@@ -4,7 +4,7 @@ import { AiOutlineMenuUnfold, AiOutlineMenuFold } from "react-icons/ai";
 import { links, SidebarListItem, PostTabLink } from "./ui/SidebarListItem";
 import { useState } from "react";
 import { googleLogout } from "@react-oauth/google";
-import useApp from "../hooks/useApp";
+import useAuthStore from "../stores/authStore";
 export default function SideBar({
   sidebarOpen,
   setSidebarOpen,
@@ -14,8 +14,8 @@ export default function SideBar({
   setSidebarOpen: (sidebarOpen: boolean) => void;
   setPostTabOpen: (postTabOpen: boolean) => void;
 }) {
-  const { currentUser }: any = useApp();
-  console.log(currentUser);
+  const { userProfile, logout }: any = useAuthStore();
+
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const date = new Date();
   const noUserPfp: string =
@@ -59,7 +59,7 @@ export default function SideBar({
         >
           <div className="my-auto flex justify-center ">
             <Image
-              src={currentUser.picture ?? noUserPfp}
+              src={userProfile ? userProfile.picture : noUserPfp}
               alt="profile"
               className="rounded-full w-10 h-10"
               height={50}
@@ -77,7 +77,10 @@ export default function SideBar({
           <div className="">
             <button
               className="text-fontActive text-[1.8rem] my-[8px]"
-              onClick={() => googleLogout()}
+              onClick={() => {
+                googleLogout();
+                logout();
+              }}
             >
               <BiLogOut />
             </button>

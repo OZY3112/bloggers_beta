@@ -3,7 +3,17 @@ import { useState, useEffect } from "react";
 import SideBar from "../compos/SideBar";
 import PostTab from "../compos/PostTab";
 import HomeBlogs from "../compos/HomeBlogs";
+import { useGoogleOneTapLogin } from "@react-oauth/google";
+import useApp from "../hooks/useApp";
+
 export default function Home() {
+  const { setCreds }: any = useApp();
+
+  useGoogleOneTapLogin({
+    onSuccess: (res): { res: { credential: string } } =>
+      setCreds(res.credential),
+    onError: () => {},
+  });
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [postTabOpen, setPostTabOpen] = useState(false);
   return (

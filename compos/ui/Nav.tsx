@@ -1,9 +1,8 @@
 import { BiSearch } from "react-icons/bi";
 import { WiSunrise, WiMoonrise } from "react-icons/wi";
-import useApp from "../../hooks/useApp";
 import useAuthStore from "../../stores/authStore";
 export default function Nav() {
-  const { currentUser }: any = useApp();
+  const { userProfile }: any = useAuthStore();
   return (
     <nav className="mb-12 flex justify-around mt-8 font-roboto-slab ">
       <h4 className=" flex text-xl text-3xl ">
@@ -13,7 +12,7 @@ export default function Nav() {
         </span>
         <span className="font-bold  my-auto"> Good morning</span>
         <span className="font-open-sans  my-auto">
-          , {currentUser.name ?? "no name"}
+          , {userProfile ? userProfile.name : "no name"}
         </span>
       </h4>
       <div className=" relative ">
