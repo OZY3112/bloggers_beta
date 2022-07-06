@@ -79,7 +79,7 @@ export default function SideBar({
               className="text-fontActive text-[1.8rem] my-[8px]"
               onClick={() => {
                 googleLogout();
-                logout();
+                // logout();
               }}
             >
               <BiLogOut />
