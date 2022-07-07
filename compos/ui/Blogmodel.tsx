@@ -7,7 +7,7 @@ export default function Blog() {
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM2VR27b_2TRmQQmTK3rMt8xNxUedXsodYg2Q2nUcH4XwCU0de4dvhK8vlhDChqcoM0Qs&usqp=CAU";
   return (
     <figure
-      className="w-[850px] h-[450px] p-4 rounded-md 
+      className="w-[850px] h-fit p-4 rounded-md 
      bg-[#ffffff] border-[1px] solid border-[#1d1d1d] m-3"
     >
       {/* user pfp and name  */}
@@ -45,7 +45,12 @@ export default function Blog() {
       {/* share like button   */}
       <div className="">
         <button className="">
-          <AiFillLike />
+          <figure className="flex">
+            <p className="">
+              <AiFillLike />
+            </p>
+            <p className="">30</p>
+          </figure>
         </button>
         <button className="">
           <BsShareFill />

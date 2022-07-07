@@ -59,7 +59,7 @@ export default function SideBar({
         >
           <div className="my-auto flex justify-center ">
             <Image
-              src={userProfile ? userProfile.picture : noUserPfp}
+              src={userProfile?.picture ?? noUserPfp}
               alt="profile"
               className="rounded-full w-10 h-10"
               height={50}
@@ -79,7 +79,7 @@ export default function SideBar({
               className="text-fontActive text-[1.8rem] my-[8px]"
               onClick={() => {
                 googleLogout();
-                // logout();
+                logout();
               }}
             >
               <BiLogOut />

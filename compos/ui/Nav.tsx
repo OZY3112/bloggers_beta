@@ -12,7 +12,7 @@ export default function Nav() {
         </span>
         <span className="font-bold  my-auto"> Good morning</span>
         <span className="font-open-sans  my-auto">
-          , {userProfile ? userProfile.name : "no name"}
+          , {userProfile?.name ?? "no name"}
         </span>
       </h4>
       <div className=" relative ">
