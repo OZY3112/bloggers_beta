@@ -5,13 +5,8 @@ import useAuthStore from "../stores/authStore";
 export default function useApp() {
   const { userProfile, addUser } = useAuthStore();
   const [creds, setCreds] = useState(null);
-  function decodeAndAddUser() {
-    console.log(creds);
-    let decoded = jwt_decode(creds);
-    addUser(decoded);
-    console.log(decoded);
-  }
-  if (creds) decodeAndAddUser();
+
+  if (creds) addUser(jwt_decode(creds));
 
   return { setCreds, userProfile };
 }

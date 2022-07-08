@@ -1,8 +1,15 @@
 import { BiSearch } from "react-icons/bi";
 import { WiSunrise, WiMoonrise } from "react-icons/wi";
 import useAuthStore from "../../stores/authStore";
+import { useState, useEffect } from "react";
+
 export default function Nav() {
   const { userProfile }: any = useAuthStore();
+  const [showProfile, setShowProfile] = useState(false);
+  useEffect(() => {
+    if (userProfile) setShowProfile(true);
+    if (!userProfile) setShowProfile(false);
+  }, []);
   return (
     <nav className="mb-12 flex justify-around mt-8 font-roboto-slab ">
       <h4 className=" flex text-xl text-3xl ">

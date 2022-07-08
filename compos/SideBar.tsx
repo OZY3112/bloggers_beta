@@ -2,7 +2,7 @@ import Image from "next/image";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineMenuUnfold, AiOutlineMenuFold } from "react-icons/ai";
 import { links, SidebarListItem, PostTabLink } from "./ui/SidebarListItem";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { googleLogout } from "@react-oauth/google";
 import useAuthStore from "../stores/authStore";
 export default function SideBar({
@@ -15,9 +15,14 @@ export default function SideBar({
   setPostTabOpen: (postTabOpen: boolean) => void;
 }) {
   const { userProfile, logout }: any = useAuthStore();
-
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const date = new Date();
+  const [showProfile, setShowProfile] = useState(false);
+  useEffect(() => {
+    if (userProfile) setShowProfile(true);
+    if (!userProfile) setShowProfile(false);
+  }, []);
+
   const noUserPfp: string =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM2VR27b_2TRmQQmTK3rMt8xNxUedXsodYg2Q2nUcH4XwCU0de4dvhK8vlhDChqcoM0Qs&usqp=CAU";
 
@@ -59,7 +64,7 @@ export default function SideBar({
         >
           <div className="my-auto flex justify-center ">
             <Image
-              src={userProfile?.picture ?? noUserPfp}
+              src={showProfile ? userProfile?.picture : noUserPfp}
               alt="profile"
               className="rounded-full w-10 h-10"
               height={50}
