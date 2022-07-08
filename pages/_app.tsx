@@ -5,10 +5,10 @@ import { WiSunrise } from "react-icons/wi";
 import { Provider as SupaProvider } from "react-supabase";
 import { ChakraProvider } from "@chakra-ui/react";
 import supabase from "../hooks/supa";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import useApp from "../hooks/useApp";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import useAuthStore from "../stores/authStore";
 import { useRouter } from "next/router";
+import jwtDecode from "jwt-decode";
 
 const Loader: any = () => {
   const router = useRouter();
@@ -19,15 +19,17 @@ const Loader: any = () => {
 
     const handleComplete = (url: string) =>
       url === router.asPath && setLoading(false);
-
-    router.events.on("routeChangeStart", handleStart);
-    router.events.on("routeChangeComplete", handleComplete);
-    router.events.on("routeChangeError", handleComplete);
-
+    if (router) {
+      router.events.on("routeChangeStart", handleStart);
+      router.events.on("routeChangeComplete", handleComplete);
+      router.events.on("routeChangeError", handleComplete);
+    }
     return () => {
-      router.events.off("routeChangeStart", handleStart);
-      router.events.off("routeChangeComplete", handleComplete);
-      router.events.off("routeChangeError", handleComplete);
+      if (router) {
+        router.events.off("routeChangeStart", handleStart);
+        router.events.off("routeChangeComplete", handleComplete);
+        router.events.off("routeChangeError", handleComplete);
+      }
     };
   });
   return (
@@ -45,11 +47,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { addUser }: any = useAuthStore();
   return (
     <>
-      {/* <Loader /> */}
       <GoogleOAuthProvider clientId={`${process.env.GOOGLE_OAUTH_ID}`}>
         <SupaProvider value={supabase}>
           <ChakraProvider>
+            <Loader />
             <Component {...pageProps} />
+            <GoogleLogin
+              onSuccess={(res) => addUser(jwtDecode(`${res.credential}`))}
+              onError={() => console.log("lol u failed")}
+            />
           </ChakraProvider>
         </SupaProvider>
       </GoogleOAuthProvider>

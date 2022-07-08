@@ -9,7 +9,7 @@ export default function Nav() {
   useEffect(() => {
     if (userProfile) setShowProfile(true);
     if (!userProfile) setShowProfile(false);
-  }, []);
+  }, [userProfile]);
   return (
     <nav className="mb-12 flex justify-around mt-8 font-roboto-slab ">
       <h4 className=" flex text-xl text-3xl ">
@@ -18,9 +18,7 @@ export default function Nav() {
           {/* for darkmode <WiMoonrise /> */}
         </span>
         <span className="font-bold  my-auto"> Good morning</span>
-        <span className="font-open-sans  my-auto">
-          , {userProfile?.name ?? "no name"}
-        </span>
+        <span className="font-open-sans  my-auto">, {userProfile?.name}</span>
       </h4>
       <div className=" relative ">
         <input

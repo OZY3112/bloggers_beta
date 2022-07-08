@@ -4,15 +4,16 @@ import SideBar from "../compos/SideBar";
 import PostTab from "../compos/PostTab";
 import HomeBlogs from "../compos/HomeBlogs";
 import { useGoogleOneTapLogin } from "@react-oauth/google";
-import useApp from "../hooks/useApp";
+import useAuthStore from "../stores/authStore";
+import jwtDecode from "jwt-decode";
 
 export default function Home() {
-  const { setCreds }: any = useApp();
+  const { addUser }: any = useAuthStore();
 
   useGoogleOneTapLogin({
     onSuccess: (res): { res: { credential: string } } =>
-      setCreds(res.credential),
-    onError: () => {},
+      addUser(jwtDecode(`${res.credential}`)),
+    onError: () => console.log('sike, ur bad'),
   });
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [postTabOpen, setPostTabOpen] = useState(false);

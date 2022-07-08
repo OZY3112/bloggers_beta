@@ -15,14 +15,7 @@ export default function SideBar({
   setPostTabOpen: (postTabOpen: boolean) => void;
 }) {
   const { userProfile, logout }: any = useAuthStore();
-  const [dropDownOpen, setDropDownOpen] = useState(false);
   const date = new Date();
-  const [showProfile, setShowProfile] = useState(false);
-  useEffect(() => {
-    if (userProfile) setShowProfile(true);
-    if (!userProfile) setShowProfile(false);
-  }, []);
-
   const noUserPfp: string =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM2VR27b_2TRmQQmTK3rMt8xNxUedXsodYg2Q2nUcH4XwCU0de4dvhK8vlhDChqcoM0Qs&usqp=CAU";
 
@@ -63,19 +56,28 @@ export default function SideBar({
           bg-sec left-0 flex mb-2 mx-auto  w-full button-0 "
         >
           <div className="my-auto flex justify-center ">
-            <Image
-              src={showProfile ? userProfile?.picture : noUserPfp}
-              alt="profile"
-              className="rounded-full w-10 h-10"
-              height={50}
-              width={50}
-            />
+            {userProfile ? (
+              <Image
+                src={userProfile?.picture}
+                alt="profile"
+                className="rounded-full w-10 h-10"
+                height={50}
+                width={50}
+              />
+            ) : (
+              <Image
+                src={noUserPfp}
+                alt="profile"
+                className="rounded-full w-10 h-10"
+                height={50}
+                width={50}
+              />
+            )}
           </div>
           {sidebarOpen && (
             <div className="text-fontActive">
-              {/* <h4 className="font-bold ">{userName}</h4> */}
-              <h6 className="flex justify-center">
-                {date.getMonth() + 1} / {date.getDate()} / {date.getFullYear()}{" "}
+              <h6 className="flex justify-center my-auto">
+                {date.getMonth() + 1} / {date.getDate()} / {date.getFullYear()}
               </h6>
             </div>
           )}
@@ -83,7 +85,7 @@ export default function SideBar({
             <button
               className="text-fontActive text-[1.8rem] my-[8px]"
               onClick={() => {
-                googleLogout();
+                // googleLogout();
                 logout();
               }}
             >
