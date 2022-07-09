@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import {
   BsFillSignpostFill,
@@ -7,6 +7,7 @@ import {
 } from "react-icons/bs";
 import { AiFillHome } from "react-icons/ai";
 import Link from "next/link";
+import { useRouter } from "next/router";
 type LinkType = {
   title: string;
   logo: ReactNode;
@@ -15,9 +16,9 @@ type LinkType = {
 
 export const links: LinkType[] = [
   {
-    title: "Blogs",
+    title: "Home",
     logo: <AiFillHome />,
-    path: "/blogs",
+    path: "/",
   },
   {
     title: "Chat",
@@ -38,8 +39,17 @@ export function SidebarListItem({
   link: any;
   sidebarOpen: boolean;
 }) {
+  const router = useRouter();
+  console.log(router);
+  console.log(router);
+  useEffect(() => {}, []);
+
   return (
-    <li className="mb-2 duration-300 py-2 hover:bg-priActive rounded-3xl">
+    <li
+      className={`mb-2 duration-300 py-2 hover:bg-priActive rounded-3xl ${
+        router && router.asPath === link.path && "bg-priActive"
+      } `}
+    >
       <Link href={link.path}>
         <div className="px-3 flex text-font mb-2 gap-3">
           <p
