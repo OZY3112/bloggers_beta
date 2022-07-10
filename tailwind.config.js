@@ -7,6 +7,7 @@ module.exports = {
         bgSec: "#e3e3e3",
         pri: "#171717",
         priActive: "#292929",
+        linkActive: "#363636",
         sec: "#1c1c24",
         secActive: "#2e2e3b",
         acs: "#4c70ff",

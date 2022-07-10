@@ -40,15 +40,12 @@ export function SidebarListItem({
   sidebarOpen: boolean;
 }) {
   const router = useRouter();
-  console.log(router);
-  console.log(router);
-  useEffect(() => {}, []);
-
   return (
     <li
-      className={`mb-2 duration-300 py-2 hover:bg-priActive rounded-3xl ${
-        router && router.asPath === link.path && "bg-priActive"
-      } `}
+      className={`mb-2 duration-300 py-2
+       hover:bg-priActive rounded-3xl ${
+         router && router.asPath === link.path && "bg-linkActive"
+       } `}
     >
       <Link href={link.path}>
         <div className="px-3 flex text-font mb-2 gap-3">

@@ -9,6 +9,8 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import useAuthStore from "../stores/authStore";
 import { useRouter } from "next/router";
 import jwtDecode from "jwt-decode";
+import SideBar from "../compos/SideBar";
+import useApp from "../hooks/useApp";
 
 const Loader: any = () => {
   const router = useRouter();
@@ -31,7 +33,10 @@ const Loader: any = () => {
   return (
     loading && (
       <div className="w-screen h-screen">
-        <div className=" motion-safe:animate-pulse text-[150px] absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%]">
+        <div
+          className=" motion-safe:animate-pulse text-[150px] absolute
+         top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%]"
+        >
           <WiSunrise className="text-yellow-300" />
         </div>
       </div>
@@ -41,13 +46,23 @@ const Loader: any = () => {
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { addUser }: any = useAuthStore();
+  const { sidebarOpen, setSidebarOpen, setPostTabOpen } = useApp();
   return (
     <>
       <GoogleOAuthProvider clientId={`${process.env.GOOGLE_OAUTH_ID}`}>
         <SupaProvider value={supabase}>
           <ChakraProvider>
             <Loader />
-            <Component {...pageProps} />
+            <div className="flex w-screen">
+              <SideBar
+                sidebarOpen={sidebarOpen}
+                setSidebarOpen={setSidebarOpen}
+                setPostTabOpen={setPostTabOpen}
+              />
+              <div className="right-0 absolute">
+                <Component {...pageProps} />
+              </div>
+            </div>
             <GoogleLogin
               onSuccess={(res) => addUser(jwtDecode(`${res.credential}`))}
               onError={() => console.log("lol u failed")}

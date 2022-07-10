@@ -3,7 +3,9 @@ import Image from "next/image";
 import { AiFillLike } from "react-icons/ai";
 import { BsShareFill } from "react-icons/bs";
 export default function Blog() {
-  const noUserPfp =
+  // TODO: finish the post design
+
+  const noUserPfp: string =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM2VR27b_2TRmQQmTK3rMt8xNxUedXsodYg2Q2nUcH4XwCU0de4dvhK8vlhDChqcoM0Qs&usqp=CAU";
   return (
     <figure
@@ -11,7 +13,7 @@ export default function Blog() {
      bg-[#ffffff] border-[1px] solid border-[#1d1d1d] m-3"
     >
       {/* user pfp and name  */}
-      <div className="flex">
+      <div className="flex border-b-[1px] border-solid border-font ">
         <figure className="my-auto">
           <Image
             src={noUserPfp}
