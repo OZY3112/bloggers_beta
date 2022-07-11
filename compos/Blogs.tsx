@@ -6,7 +6,7 @@ export default function Blogs() {
   return (
     <section className="w-full align-center ">
       <VStack>
-        {new Array(5).fill(0).map((_, i) => (
+        {new Array(3).fill(0).map((_, i) => (
           <Blog key={i} />
         ))}
       </VStack>
