@@ -11,6 +11,7 @@ specifiers:
   '@types/react': 18.0.9
   '@types/react-dom': 18.0.3
   autoprefixer: ^10.4.7
+  axios: ^0.27.2
   cypress: ^9.6.1
   eslint: 8.15.0
   eslint-config-next: 12.1.6
@@ -35,6 +36,7 @@ dependencies:
   '@emotion/styled': 11.9.3_yxurtv637hmxxv2bnmo4pwtbdm
   '@react-oauth/google': 0.2.6_biqbaboplfbrettd7655fr4n2y
   '@supabase/supabase-js': 1.35.4
+  axios: 0.27.2
   cypress: 9.6.1
   framer-motion: 6.3.16_biqbaboplfbrettd7655fr4n2y
   highlight.js: 11.5.1
@@ -2283,6 +2285,15 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /axios/0.27.2:
+    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
+    dependencies:
+      follow-redirects: 1.15.1
+      form-data: 4.0.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /axobject-query/2.2.0:
     resolution: {integrity: sha512-Td525n+iPOOyUQIeBfcASuG6uJsDOITl7Mds5gFyerkWiX7qhUTdYUBlSgNMyVqtSJqwpt1kXGLdUt6SykLMRA==}
     dev: true
@@ -3487,6 +3498,16 @@ packages:
       tslib: 2.4.0
     dev: false
 
+  /follow-redirects/1.15.1:
+    resolution: {integrity: sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dev: false
+
   /forever-agent/0.6.1:
     resolution: {integrity: sha1-+8cfDEGt6zf5bFd60e1C2P2sypE=}
     dev: false
@@ -3494,6 +3515,15 @@ packages:
   /form-data/2.3.3:
     resolution: {integrity: sha512-1lLKB2Mu3aGP1Q/2eCOx0fNbRMe7XdwktwOruhfqqd0rIJWwN4Dh+E3hrPSlDCXnSR7UtZ1N38rVXm+6+MEhJQ==}
     engines: {node: '>= 0.12'}
+    dependencies:
+      asynckit: 0.4.0
+      combined-stream: 1.0.8
+      mime-types: 2.1.35
+    dev: false
+
+  /form-data/4.0.0:
+    resolution: {integrity: sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==}
+    engines: {node: '>= 6'}
     dependencies:
       asynckit: 0.4.0
       combined-stream: 1.0.8

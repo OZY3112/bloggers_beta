@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useState, useEffect } from "react";
 import SideBar from "../compos/SideBar";
 import PostTab from "../compos/PostTab";
 import HomeBlogs from "../compos/HomeBlogs";
