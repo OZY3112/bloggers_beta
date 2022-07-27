@@ -8,7 +8,6 @@ import supabase from "../hooks/supa";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useRouter } from "next/router";
 import SideBar from "../compos/SideBar";
-import useApp from "../hooks/useApp";
 
 const Loader: any = () => {
   const router = useRouter();
@@ -43,7 +42,7 @@ const Loader: any = () => {
 };
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { sidebarOpen, setSidebarOpen, setPostTabOpen } = useApp();
+
   return (
     <>
       <GoogleOAuthProvider clientId={`${process.env.GOOGLE_OAUTH_ID}`}>
@@ -51,11 +50,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <ChakraProvider>
             <Loader />
             <div className="flex w-screen">
-              <SideBar
-                sidebarOpen={sidebarOpen}
-                setSidebarOpen={setSidebarOpen}
-                setPostTabOpen={setPostTabOpen}
-              />
+              <SideBar />
               <div className="right-0 absolute">
                 <Component {...pageProps} />
               </div>

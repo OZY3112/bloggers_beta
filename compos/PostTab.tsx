@@ -1,10 +1,12 @@
 import { useState } from "react";
+import useSettings from "../stores/settingStore";
 
 const PostTab = ({
   setPostTabOpen,
 }: {
   setPostTabOpen: (open: boolean) => void;
 }) => {
+  const { closePostTab } = useSettings();
   const [animationDelay, setAnimationDelay] = useState(false);
 
   return (
@@ -16,7 +18,7 @@ const PostTab = ({
       <div
         onClick={() => {
           setAnimationDelay(true);
-          setTimeout(() => setPostTabOpen(false), 200);
+          setTimeout(() => closePostTab(), 200);
         }}
         className=" top-0 left-0 absolute h-screen w-screen bg-[#000000a4] z-10"
       />

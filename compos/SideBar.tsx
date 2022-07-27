@@ -3,15 +3,9 @@ import { BiLogOut } from "react-icons/bi";
 import { AiOutlineMenuUnfold, AiOutlineMenuFold } from "react-icons/ai";
 import { links, SidebarListItem, PostTabLink } from "./ui/SidebarListItem";
 import useAuthStore from "../stores/authStore";
-export default function SideBar({
-  sidebarOpen,
-  setSidebarOpen,
-  setPostTabOpen,
-}: {
-  sidebarOpen: boolean;
-  setSidebarOpen: (sidebarOpen: boolean) => void;
-  setPostTabOpen: (postTabOpen: boolean) => void;
-}) {
+import useSettings from "../stores/settingStore";
+export default function SideBar() {
+  const { closeSideBar, openSideBar, sidebarOpen } = useSettings();
   const { userProfile, logout }: any = useAuthStore();
   const date = new Date();
   const noUserPfp: string =
@@ -30,9 +24,7 @@ export default function SideBar({
         <ul className=" mx-[1rem] my-[2rem] ">
           <li
             className=" duration-300 py-2 rounded-3xl "
-            onClick={() =>
-              sidebarOpen ? setSidebarOpen(false) : setSidebarOpen(true)
-            }
+            onClick={() => (sidebarOpen ? closeSideBar() : openSideBar())}
           >
             <div className=" px-3 flex text-font duration-300 hover:text-fontActive mb-2 gap-3  ">
               <p className={"my-auto text-[1.8rem] text-fontActive "}>
@@ -43,10 +35,7 @@ export default function SideBar({
           {links.map((link, i) => (
             <SidebarListItem link={link} sidebarOpen={sidebarOpen} key={i} />
           ))}
-          <PostTabLink
-            setPostTabOpen={setPostTabOpen}
-            sidebarOpen={sidebarOpen}
-          />
+          <PostTabLink />
         </ul>
         <figure
           className="  

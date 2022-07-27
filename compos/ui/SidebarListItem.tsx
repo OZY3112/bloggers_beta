@@ -4,6 +4,8 @@ import { BsFillSignpostFill, BsFillChatFill } from "react-icons/bs";
 import { AiFillHome } from "react-icons/ai";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import useSettings from "../../stores/settingStore";
+
 type LinkType = {
   title: string;
   logo: ReactNode;
@@ -61,20 +63,25 @@ export function SidebarListItem({
   );
 }
 
-export const PostTabLink = ({ setPostTabOpen, sidebarOpen }: any) => (
-  <li
-    className=" duration-300 py-2 bg-acs  hover:bg-acsActive rounded-3xl"
-    onClick={() => setPostTabOpen(true)}
-  >
-    <div className=" px-3 flex text-font duration-300 hover:text-fontActive mb-2 gap-3  ">
-      <p
-        className={`my-auto text-[1.8rem] text-fontActive ${
-          !sidebarOpen && "mx-auto"
-        } `}
-      >
-        <BsFillSignpostFill />
-      </p>
-      {sidebarOpen && <p className="my-auto text-[1.5rem font-thine ">post</p>}
-    </div>
-  </li>
-);
+export const PostTabLink = ({}) => {
+  const { postTabOpen, closePostTab, openPostTab, sidebarOpen } = useSettings();
+  return (
+    <li
+      className=" duration-300 py-2 bg-acs  hover:bg-acsActive rounded-3xl"
+      onClick={() => (postTabOpen ? closePostTab() : openPostTab())}
+    >
+      <div className=" px-3 flex text-font duration-300 hover:text-fontActive mb-2 gap-3  ">
+        <p
+          className={`my-auto text-[1.8rem] text-fontActive ${
+            !sidebarOpen && "mx-auto"
+          } `}
+        >
+          <BsFillSignpostFill />
+        </p>
+        {sidebarOpen && (
+          <p className="my-auto text-[1.5rem font-thine ">post</p>
+        )}
+      </div>
+    </li>
+  );
+};
