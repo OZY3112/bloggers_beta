@@ -1,10 +1,6 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import { FaUserAlt } from "react-icons/fa";
-import {
-  BsFillSignpostFill,
-  BsFillChatFill,
-  BsThreeDotsVertical,
-} from "react-icons/bs";
+import { BsFillSignpostFill, BsFillChatFill } from "react-icons/bs";
 import { AiFillHome } from "react-icons/ai";
 import Link from "next/link";
 import { useRouter } from "next/router";

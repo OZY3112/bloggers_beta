@@ -5,10 +5,8 @@ import { WiSunrise } from "react-icons/wi";
 import { Provider as SupaProvider } from "react-supabase";
 import { ChakraProvider } from "@chakra-ui/react";
 import supabase from "../hooks/supa";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import useAuthStore from "../stores/authStore";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useRouter } from "next/router";
-import jwtDecode from "jwt-decode";
 import SideBar from "../compos/SideBar";
 import useApp from "../hooks/useApp";
 
@@ -45,7 +43,6 @@ const Loader: any = () => {
 };
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { addUser }: any = useAuthStore();
   const { sidebarOpen, setSidebarOpen, setPostTabOpen } = useApp();
   return (
     <>
@@ -63,10 +60,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <Component {...pageProps} />
               </div>
             </div>
-            <GoogleLogin
-              onSuccess={(res) => addUser(jwtDecode(`${res.credential}`))}
-              onError={() => console.log("lol u failed")}
-            />
           </ChakraProvider>
         </SupaProvider>
       </GoogleOAuthProvider>

@@ -2,8 +2,6 @@ import Image from "next/image";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineMenuUnfold, AiOutlineMenuFold } from "react-icons/ai";
 import { links, SidebarListItem, PostTabLink } from "./ui/SidebarListItem";
-import { useState, useEffect } from "react";
-import { googleLogout } from "@react-oauth/google";
 import useAuthStore from "../stores/authStore";
 export default function SideBar({
   sidebarOpen,
@@ -56,23 +54,13 @@ export default function SideBar({
           bg-sec left-0 flex mb-2 mx-auto  w-full button-0 "
         >
           <div className="my-auto flex justify-center ">
-            {userProfile ? (
-              <Image
-                src={userProfile?.picture}
-                alt="profile"
-                className="rounded-full w-10 h-10"
-                height={50}
-                width={50}
-              />
-            ) : (
-              <Image
-                src={noUserPfp}
-                alt="profile"
-                className="rounded-full w-10 h-10"
-                height={50}
-                width={50}
-              />
-            )}
+            <Image
+              src={userProfile?.picture ?? noUserPfp}
+              alt="profile"
+              className="rounded-full w-10 h-10"
+              height={50}
+              width={50}
+            />
           </div>
           {sidebarOpen && (
             <div className="text-fontActive">
