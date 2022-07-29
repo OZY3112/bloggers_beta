@@ -1,22 +1,21 @@
 import create from "zustand";
-import { persist } from "zustand/middleware";
 
 const settingsStore = (set) => ({
+  // sidebar
   sidebarOpen: true,
   closeSideBar: () => set({ sidebarOpen: false }),
   openSideBar: () => set({ sidebarOpen: true }),
 
+  // post tab
   postTabOpen: false,
   closePostTab: () => set({ postTabOpen: false }),
   openPostTab: () => set({ postTabOpen: true }),
 
-  theme: "light"
+  // theme
+  theme: "light",
+  
 });
 
-const useSettings = create(
-  persist(settingsStore, {
-    name: "settings",
-  })
-);
+const useSettings = create(settingsStore);
 
 export default useSettings;

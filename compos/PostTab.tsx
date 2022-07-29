@@ -1,11 +1,7 @@
 import { useState } from "react";
 import useSettings from "../stores/settingStore";
 
-const PostTab = ({
-  setPostTabOpen,
-}: {
-  setPostTabOpen: (open: boolean) => void;
-}) => {
+const PostTab = ({}) => {
   const { closePostTab } = useSettings();
   const [animationDelay, setAnimationDelay] = useState(false);
 
